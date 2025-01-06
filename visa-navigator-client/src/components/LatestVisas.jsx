@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import { Fade } from "react-awesome-reveal"; // Import React Awesome Reveal
+import { AuthContext } from "../provider/AuthProvider";
 
 const LatestVisas = () => {
   const [latestVisas, setLatestVisas] = useState([]);
+  const { user } = useContext(AuthContext);
 
   // Fetch the latest 6 visas
   useEffect(() => {
@@ -77,12 +79,23 @@ const LatestVisas = () => {
       {/* See All Visas Button */}
       <div className="text-center mt-8">
         <Fade duration={1000} triggerOnce>
-          <Link
-            to="/all-visas"
-            className="inline-block bg-purple-500 text-white text-lg py-2 px-6 rounded-lg hover:bg-purple-600 transition"
-          >
-            See All Visas
-          </Link>
+          {
+            user && user?.email ? <>  <Link
+              to="/all-visas"
+              className="inline-block bg-purple-500 text-white text-lg py-2 px-6 rounded-lg hover:bg-purple-600 transition"
+            >
+              See All Visas
+            </Link></>
+              :
+              <>
+                <Link
+                  to="/login"
+                  className="inline-block bg-purple-500 text-white text-lg py-2 px-6 rounded-lg hover:bg-purple-600 transition"
+                >
+                  See All Visas
+                </Link>
+              </>
+          }
         </Fade>
       </div>
     </div>
