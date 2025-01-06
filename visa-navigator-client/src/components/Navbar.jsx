@@ -61,16 +61,25 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
+
       <li className="">
         <NavLink
-          to="/all-visas"
+          to="/about-us"
           className="hover:text-white dark:text-white "
         >
-          All Visas
+          About Us
         </NavLink>
       </li>
       {
         user && user?.email ? <>
+          <li className="">
+            <NavLink
+              to="/all-visas"
+              className="hover:text-white dark:text-white "
+            >
+              All Visas
+            </NavLink>
+          </li>
           <li>
             <NavLink to="/add-visa" className="hover:text-white dark:text-white">
               Add Visa

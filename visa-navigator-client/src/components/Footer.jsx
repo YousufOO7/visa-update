@@ -1,5 +1,4 @@
-import { FaFacebook, FaInstagramSquare, FaYoutube } from "react-icons/fa";
-import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaInstagramSquare, FaLinkedin } from "react-icons/fa";
 import footerImg from '../assets/visa1.png'
 
 const Footer = () => {
@@ -17,28 +16,22 @@ const Footer = () => {
           </p>
           <div className="flex space-x-4 mt-4">
             <a
-              href="#"
+              href="https://www.facebook.com/Mdyousufjobaer"
               className="text-white dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400 rounded-full"
             >
               <FaFacebook className="text-2xl" />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/yousuf-jobaer-099b9832b/"
               className="text-white dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400 rounded-full"
             >
-              <FaSquareXTwitter className="text-2xl" />
+              <FaLinkedin className="text-2xl"></FaLinkedin>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/yousuf_jobaer_/"
               className="text-white dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400 rounded-full"
             >
               <FaInstagramSquare className="text-2xl" />
-            </a>
-            <a
-              href="#"
-              className="text-white dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400 rounded-full"
-            >
-              <FaYoutube className="text-2xl" />
             </a>
           </div>
         </div>

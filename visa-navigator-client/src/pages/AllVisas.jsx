@@ -1,13 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Loading from "../components/Loading"; // Import Loading component
-import { Fade } from "react-awesome-reveal"; // Import React Awesome Reveal for animation
 
 const AllVisas = () => {
   // State for managing loading and visa types
   const [loading, setLoading] = useState(true);
-  const [selectedVisaType, setSelectedVisaType] = useState(""); // For storing selected visa type
+  const [sortOrder, setSortOrder] = useState("all"); // Default is "all"
   const loadedAllVisas = useLoaderData();
   const [allVisas, setAllVisas] = useState([]);
 
@@ -19,15 +17,22 @@ const AllVisas = () => {
     }, 100); // Simulated delay (adjust as needed)
   }, [loadedAllVisas]);
 
-  // Handle the filter change
-  const handleFilterChange = (e) => {
-    setSelectedVisaType(e.target.value);
+  // Handle sort change
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
   };
 
-  // Filter the visas based on selected visa type
-  const filteredVisas = selectedVisaType
-    ? allVisas.filter((visa) => visa.visaType === selectedVisaType)
-    : allVisas;
+  // Sort visas by fee based on sort order
+  const sortedVisas =
+    sortOrder === "all"
+      ? allVisas
+      : [...allVisas].sort((a, b) => {
+          if (sortOrder === "ascending") {
+            return a.fee - b.fee;
+          } else {
+            return b.fee - a.fee;
+          }
+        });
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -37,17 +42,13 @@ const AllVisas = () => {
       {/* Dropdown Menu for filtering */}
       <div className="mb-8 flex justify-center">
         <select
-          value={selectedVisaType}
-          onChange={handleFilterChange}
+          value={sortOrder}
+          onChange={handleSortChange}
           className="p-2 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600"
         >
-          <option value="" disabled>
-            Select Visa Type
-          </option>
-          <option value="Tourist Visa">Tourist Visa</option>
-          <option value="Student Visa">Student Visa</option>
-          <option value="Official Visa">Official Visa</option>
-          <option value="Work Visa">Work Visa</option>
+          <option value="all">Show All</option>
+          <option value="ascending">Sort by Fee: Low to High</option>
+          <option value="descending">Sort by Fee: High to Low</option>
         </select>
       </div>
 
@@ -56,45 +57,57 @@ const AllVisas = () => {
         <div className="flex justify-center items-center h-40">
           <Loading />
         </div>
-      ) : filteredVisas.length === 0 ? (
+      ) : sortedVisas.length === 0 ? (
         <p className="text-center text-gray-600 dark:text-gray-400">
           No visas available for the selected type.
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredVisas.map((visa) => (
-            <Fade key={visa._id} duration={1000} triggerOnce>
-              {" "}
-              {/* Animation for each visa card */}
-              <div className="bg-white border dark:border-gray-700 dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 duration-300">
-                <img
-                  src={visa.countryImage}
-                  alt={visa.countryName}
-                  className="w-full h-40 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-2">
-                    {visa.countryName}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                    <strong></strong> {visa.visaType}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                    <strong></strong> ${visa.fee}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                    <strong></strong> {visa.validity}
-                  </p>
-                  <Link
-                    to={`/visa-details/${visa._id}`}
-                    className="inline-block bg-blue-500 text-white text-sm py-2 px-4 rounded hover:bg-blue-600 transition"
-                  >
-                    See Details
-                  </Link>
-                </div>
-              </div>
-            </Fade>
-          ))}
+        <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Country Image</th>
+                <th>Country Name</th>
+                <th>Visa Type</th>
+                <th>Visa Fee</th>
+                <th>Visa Validity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedVisas.map((visa, idx) => (
+                <tr key={visa._id}>
+                  <th>{idx + 1}</th>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img
+                            src={visa.countryImage}
+                            alt={visa.countryName}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{visa.countryName}</td>
+                  <td>{visa.visaType}</td>
+                  <td>{visa.fee}</td>
+                  <td>{visa.validity}</td>
+                  <th>
+                    <Link
+                      to={`/visa-details/${visa._id}`}
+                      className="inline-block bg-blue-500 text-white text-sm py-2 px-4 rounded hover:bg-blue-600 transition"
+                    >
+                      See Details
+                    </Link>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

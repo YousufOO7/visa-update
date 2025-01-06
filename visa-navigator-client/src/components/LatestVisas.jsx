@@ -29,7 +29,7 @@ const LatestVisas = () => {
       </h2>
 
       {/* Visa Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {latestVisas.map((visa) => (
           <Fade key={visa._id} duration={1500} triggerOnce>
             {" "}
@@ -46,19 +46,19 @@ const LatestVisas = () => {
                     {visa.countryName}
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                    <strong>Visa Type:</strong> {visa.visaType}
+                    <strong></strong> {visa.visaType}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                    <strong>Processing Time:</strong> {visa.processingTime}
+                    <strong></strong> {visa.processingTime}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                    <strong>Fee:</strong> ${visa.fee}
+                    <strong></strong> ${visa.fee}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                    <strong>Validity:</strong> {visa.validity}
+                    <strong></strong> {visa.validity}
                   </p>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    <strong>Application Method:</strong>{" "}
+                    <strong></strong>{" "}
                     {visa.applicationMethod}
                   </p>
                 </div>

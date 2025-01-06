@@ -12,6 +12,7 @@ import VisaDetails from "./../pages/VisaDetails";
 import MyApplications from "../pages/MyApplications";
 import MyAddedVisas from "../pages/MyAddedVisas";
 import PrivetRoute from "./PrivetRoute";
+import AboutUs from "../components/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: '/about-us',
+        element: <AboutUs></AboutUs>
+      },
+      {
         path: "/all-visas",
         element: <AllVisas />,
         loader: () =>
@@ -32,9 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/visa-details/:id",
         element: (
-          <PrivetRoute>
-            <VisaDetails />
-          </PrivetRoute>
+          <VisaDetails />
         ),
         loader: ({ params }) =>
           fetch(

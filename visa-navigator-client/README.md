@@ -5,10 +5,8 @@
 Visa Navigator is a modern web application designed to simplify visa-related processes. With its intuitive interface, users can browse, manage, and apply for visas efficiently. This project emphasizes responsive design, seamless user experience, and advanced features like authentication, notifications, and animations.
 
 ---
-# Live Link 🌍
-- **FireBase** - [https://visa-navigator-ff427.web.app/](https://visa-navigator-ff427.web.app/) 
+# Live Link 🌍 
 - **Netlify** - [https://visa-navigator-devsiam.netlify.app/](https://visa-navigator-devsiam.netlify.app/) 
-- **Surge** - [https://visa-navigator-devsiam.surge.sh/](https://visa-navigator-devsiam.surge.sh/) 
 
 ---
 # Key Features 🌟

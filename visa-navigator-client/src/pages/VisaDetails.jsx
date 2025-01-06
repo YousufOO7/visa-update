@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 
 const VisaDetails = () => {
   const visa = useLoaderData();
-    const { user } = useContext(AuthContext);
-    const userEmail = user?.email || "";
+  const { user } = useContext(AuthContext);
+  const userEmail = user?.email || "";
 
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -107,12 +107,23 @@ const VisaDetails = () => {
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             <strong>Description:</strong> {visa.description}
           </p>
-          <button
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-            onClick={() => setShowModal(true)}
-          >
-            Apply for the Visa
-          </button>
+          {
+            user ? <button
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+              onClick={() => setShowModal(true)}
+            >
+              Apply for the Visa
+            </button>
+              :
+              <Link to='/login'>
+                <button
+                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+
+                >
+                  Apply for the Visa
+                </button>
+              </Link>
+          }
         </div>
       </div>
 
