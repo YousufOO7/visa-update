@@ -6,10 +6,13 @@ Visa Navigator is a modern web application designed to simplify visa-related pro
 
 ---
 # Live Link  
-- **Netlify** - [https://visa-upgrade.netlify.app/](https://visa-upgrade.netlify.app/) 
+- **Netlify** - [https://visa-upgrade.netlify.app/](https://visa-upgrade.netlify.app/)
+
 <h3>How to use manually</h3>
 <ul>
   <p>run npm install to client and server side</p>
+   <p>Use your firebase code for authentication</p>    
+    <p>Make sure your file have env.local file</p> 
 </ul>
 ---
 # Key Features 🌟
